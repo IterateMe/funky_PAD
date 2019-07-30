@@ -6,7 +6,6 @@ GPIO.setup([11,12,13,15,16,18], GPIO.OUT)
 GPIO.setup([31,32], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 mode = 1
-delay = 2
 
 pin_left = [11,12,13]
 pin_right = [15,16,18]
@@ -18,24 +17,23 @@ def mode_1(choice):
     else:
         pins = pin_right
     GPIO.output(pins, 1)
-    time.sleep(delay)
+    time.sleep(1.5)
     GPIO.output(pins, 0)
 
 def mode_2(choice):
     print("THIS IS MODE 2")
-    delay = round(delay/3, 2)
     if choice:
         pins = pin_left
     else:
         pins = pin_right
     GPIO.output(pins[0], 1)
-    time.sleep(delay)
+    time.sleep(0.5)
     GPIO.output(pins[0], 0)
     GPIO.output(pins[1], 1)
-    time.sleep(delay)
+    time.sleep(0.5)
     GPIO.output(pins[1], 0)
     GPIO.output(pins[2], 1)
-    time.sleep(delay)
+    time.sleep(0.5)
     GPIO.output(pins[2], 0)
 
 def mode_3(choice):
@@ -46,13 +44,13 @@ def mode_3(choice):
     else:
         pins = pin_right
     GPIO.output(pins[2], 1)
-    time.sleep(delay)
+    time.sleep(0.5)
     GPIO.output(pins[2], 0)
     GPIO.output(pins[1], 1)
-    time.sleep(delay)
+    time.sleep(0.5)
     GPIO.output(pins[1], 0)
     GPIO.output(pins[0], 1)
-    time.sleep(delay)
+    time.sleep(0.5)
     GPIO.output(pins[0], 0)
 
 def callback_left(self):
