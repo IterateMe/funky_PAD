@@ -12,6 +12,7 @@ pin_left = [11,12,13]
 pin_right = [15,16,18]
 
 def mode_1(choice):
+    print("THIS IS MODE 1")
     if choice:
         pins = pin_left
     else:
@@ -21,6 +22,7 @@ def mode_1(choice):
     GPIO.output(pins, 0)
 
 def mode_2(choice):
+    print("THIS IS MODE 2")
     if choice:
         pins = pin_left
     else:
@@ -36,6 +38,7 @@ def mode_2(choice):
     GPIO.output(pins[2], 0)
 
 def mode_3(choice):
+    print("THIS IS MODE 3")
     if choice:
         pins = pin_left
     else:
@@ -72,6 +75,7 @@ if __name__ == "__main__":
         GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 200)
         GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 200)
         while True:
+            global mode
             print("Your actual mode:  ", mode)
             print("""Choose an option between those two:
            [1] For simultanous activation
@@ -81,7 +85,6 @@ if __name__ == "__main__":
            [5] For sequential <PWM> activation Front to back
            [6] For random activation
            """)
-            global mode 
             mode = int(input())
 
     except KeyboardInterrupt:
