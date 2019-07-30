@@ -38,7 +38,6 @@ def mode_2(choice):
 
 def mode_3(choice):
     print("THIS IS MODE 3")
-    delay = round(delay/3, 2)
     if choice:
         pins = pin_left
     else:
@@ -72,8 +71,8 @@ def callback_right(self):
 
 if __name__ == "__main__":
     try:
-        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 200)
-        GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 200)
+        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 400)
+        GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 400)
         while True:
             global mode
             print("Your actual mode:  ", mode)
