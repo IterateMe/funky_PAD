@@ -5,7 +5,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup([11,12,13,15,16,18], GPIO.OUT)
 GPIO.setup([31,32], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-mode = 1
+global mode = 1
 
 pin_left = [11,12,13]
 pin_right = [15,16,18]
