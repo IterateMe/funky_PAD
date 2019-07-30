@@ -50,7 +50,7 @@ def mode_3(choice):
     time.sleep(delay/3)
     GPIO.output(pins[0], 0)
 
-def callback_left():
+def callback_left(self):
     if mode == 1:
         mode_1(1)
     if mode == 2:
@@ -58,7 +58,7 @@ def callback_left():
     if mode == 3:
         mode_3(1)
 
-def callback_right():
+def callback_right(self):
     if mode == 1:
         mode_1(0)
     if mode == 2:
