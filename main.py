@@ -5,7 +5,6 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup([11,12,13,15,16,18], GPIO.OUT)
 GPIO.setup([31,32], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-global mode = 1
 
 pin_left = [11,12,13]
 pin_right = [15,16,18]
@@ -75,6 +74,7 @@ if __name__ == "__main__":
         GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 400)
         while True:
             global mode
+            mode = 1
             print("Your actual mode:  ", mode)
             print("""Choose an option between those two:
            [1] For simultanous activation
