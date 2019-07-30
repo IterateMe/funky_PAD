@@ -87,4 +87,4 @@ if __name__ == "__main__":
             mode = int(input())
 
     except KeyboardInterrupt:
-        GPIO.cleanup
+        GPIO.cleanup()
