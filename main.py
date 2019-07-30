@@ -28,13 +28,13 @@ def mode_2(choice):
     else:
         pins = pin_right
     GPIO.output(pins[0], 1)
-    time.sleep(delay/3)
+    time.sleep(delay)
     GPIO.output(pins[0], 0)
     GPIO.output(pins[1], 1)
-    time.sleep(delay/3)
+    time.sleep(delay)
     GPIO.output(pins[1], 0)
     GPIO.output(pins[2], 1)
-    time.sleep(delay/3)
+    time.sleep(delay)
     GPIO.output(pins[2], 0)
 
 def mode_3(choice):
