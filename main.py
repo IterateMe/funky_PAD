@@ -59,6 +59,12 @@ def callback_left(self):
         mode_2(1)
     if mode == 3:
         mode_3(1)
+    if mode == 4:
+        mode_4(1)
+    if mode == 5:
+        mode_5(1)
+    if mode == 6:
+        mode_6(1)
 
 def callback_right(self):
     if mode == 1:
@@ -67,12 +73,17 @@ def callback_right(self):
         mode_2(0)
     if mode == 3:
         mode_3(0)
-
+    if mode == 4:
+        mode_4(0)
+    if mode == 5:
+        mode_5(0)
+    if mode == 6:
+        mode_6(0)
 
 if __name__ == "__main__":
     try:
-        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 400)
-        GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 400)
+        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 700)
+        GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 700)
         while True:
             global mode
             print("Your actual mode:  ", mode)
