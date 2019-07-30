@@ -5,8 +5,6 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup([11,12,13,15,16,18], GPIO.OUT)
 GPIO.setup([31,32], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-test github
-
 mode = 1
 delay = 2
 
@@ -83,7 +81,8 @@ if __name__ == "__main__":
            [5] For sequential <PWM> activation Front to back
            [6] For random activation
            """)
-            global mode = int(input())
+            global mode 
+            mode = int(input())
 
     except KeyboardInterrupt:
         GPIO.cleanup
