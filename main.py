@@ -64,7 +64,7 @@ def mode_4(pins):
 
 def mode_5(pins):
     f = 50
-    s = 0.05
+    s = 0.03
     p_1 = GPIO.PWM(pins[2], f)
     p_2 = GPIO.PWM(pins[1], f)
     p_3 = GPIO.PWM(pins[0], f)
@@ -190,16 +190,16 @@ if __name__ == "__main__":
         while True:
             global mode
             print("Your actual mode:  ", mode)
-            print("""Choose an option between those two:
-           [1] For simultanous activation
-           [2] For Sequential <logic> activation Back to Front
-           [3] For Sequential <logic> activation Front to Back
-           [4] For sequential <PWM> activation Back to Front
-           [5] For sequential <PWM> activation Front to Back
-           [6] For random activation
-           [7] For Simultanous <PWM> activation
+            print("""OPTIONS  :
+           [1] For L/R simultanous activation
+           [2] For L/R Sequential <logic> activation Back to Front
+           [3] For L/R Sequential <logic> activation Front to Back
+           [4] For L/R sequential <PWM> activation Back to Front
+           [5] For L/R sequential <PWM> activation Front to Back
+           [6] For L/R random activation
+           [7] For L/R Simultanous <PWM> activation
            [8] For ALL OUTPUT RANDOM
-           [9] For Sequential <PWM> DESactivation Back to Front
+           [9] For L/R Sequential <PWM> DESactivation Back to Front
            """)
             mode = int(input())
 
