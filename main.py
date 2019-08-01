@@ -83,7 +83,7 @@ def mode_5(choice):
     else:
         pins = pin_right
     f = 50
-    s = 0.01
+    s = 0.05
     p_1 = GPIO.PWM(pins[2], f)
     p_2 = GPIO.PWM(pins[1], f)
     p_3 = GPIO.PWM(pins[0], f)
