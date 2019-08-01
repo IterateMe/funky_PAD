@@ -108,10 +108,10 @@ def mode_6(choice):
         pins = pin_right
     count = 50
     while count != 0:
-        l = random.choice([1,2,3])
-        GPIO.output(pins[l], 1)
+        D = random.choice([0,1,2])
+        GPIO.output(pins[D], 1)
         time.sleep(0.1)
-        GPIO.output(pins[l], 0)
+        GPIO.output(pins[D], 0)
         count -= 1
 
 def callback_left(self):
