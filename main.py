@@ -125,12 +125,12 @@ def mode_7(choice):
     p_1.start(0)
     p_2.start(0)
     p_3.start(0)
-    for dc in range(0,101,5):
+    for dc in range(0,101,10):
         p_1.ChangeDutyCycle(dc)
         p_2.ChangeDutyCycle(dc)
         p_3.ChangeDutyCycle(dc)
         time.sleep(s)
-    for dc in range(100, -1, -5):
+    for dc in range(100, -1, -10):
         p_1.ChangeDutyCycle(dc)
         p_2.ChangeDutyCycle(dc)
         p_3.ChangeDutyCycle(dc)
