@@ -119,10 +119,16 @@ def mode_7(choice):
     else:
         pins = pin_right
     s=0.1
-    p=GPIO.PWM(pins, 50)
-    p.start(0)
+    p_1 = GPIO.PWM(pins[0], 50)
+    p_2 = GPIO.PWM(pins[1], 50)
+    p_3 = GPIO.PWM(pins[2], 50)
+    p_1.start(0)
+    p_2.start(0)
+    p_3.start(0)
     for dc in range(0,101,5):
-        p.CHangeDutyCycle(dc)
+        p_1.CHangeDutyCycle(dc)
+        p_2.CHangeDutyCycle(dc)
+        p_3.CHangeDutyCycle(dc)
         time.sleep(s)
     for dc in range(100, -1, -5):
         p.ChangeDutyCycle(dc)
