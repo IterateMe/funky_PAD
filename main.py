@@ -129,15 +129,16 @@ def mode_9(pins):
     p_1.start(100)
     p_2.start(100)
     p_3.start(100)
+    s = 0.05
     for dc in range(100,-1, -5):
         p_1.ChangeDutyCycle(dc)
-        time.sleep(0.1)
+        time.sleep(s)
     for dc in range(100,-1, -5):
         p_2.ChangeDutyCycle(dc)
-        time.sleep(0.1)
+        time.sleep(s)
     for dc in range(100,-1, -5):
         p_3.ChangeDutyCycle(dc)
-        time.sleep(0.1)
+        time.sleep(s)
 
 def callback_left(self):
     if mode == 1:
