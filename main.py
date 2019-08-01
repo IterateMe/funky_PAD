@@ -114,12 +114,30 @@ def mode_7(pins):
 
 def mode_8(pins):
     count = 50
+    s = 0.1
     while count != 0:
         D = random.choice([0,1,2,3,4,5])
         GPIO.output(pins[D], 1)
-        time.sleep(0.05)
+        time.sleep(s)
         GPIO.output(pins[D], 0)
         count -= 1
+
+def mode_9(pins):
+    p_1 = GPIO.PWM(pins[0], 50)
+    p_2 = GPIO.PWM(pins[1], 50)
+    p_3 = GPIO.PWM(pins[2], 50)
+    p_1.start(100)
+    p_2.start(100)
+    p_3.start(100)
+    for dc in range(100,-1, -5):
+        p_1.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+    for dc in range(100,-1, -5):
+        p_2.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+    for dc in range(100,-1, -5):
+        p_3.ChangeDutyCycle(dc)
+        time.sleep(0.1)
 
 def callback_left(self):
     if mode == 1:
@@ -139,6 +157,8 @@ def callback_left(self):
     if mode == 8:
         pin_left.extend(pin_right)
         mode_8(pin_left)
+    if mode == 9:
+        mode_9(pin_left)
 
 def callback_right(self):
     if mode == 1:
@@ -158,6 +178,8 @@ def callback_right(self):
     if mode == 8:
         pin_left.extend(pin_right)
         mode_8(pin_left)
+    if mode == 9:
+        mode_9(pin_right)
 
 if __name__ == "__main__":
     try:
@@ -168,13 +190,14 @@ if __name__ == "__main__":
             print("Your actual mode:  ", mode)
             print("""Choose an option between those two:
            [1] For simultanous activation
-           [2] For Sequential <logic> activation Back to front
-           [3] For Sequential <logic> activation Front to back
-           [4] For sequential <PWM> activation Back to front
-           [5] For sequential <PWM> activation Front to back
+           [2] For Sequential <logic> activation Back to Front
+           [3] For Sequential <logic> activation Front to Back
+           [4] For sequential <PWM> activation Back to Front
+           [5] For sequential <PWM> activation Front to Back
            [6] For random activation
            [7] For Simultanous <PWM> activation
            [8] For ALL OUTPUT RANDOM
+           [9] For Sequential <PWM> DESactivation Back to Front
            """)
             mode = int(input())
 
