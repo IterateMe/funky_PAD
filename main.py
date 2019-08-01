@@ -82,7 +82,8 @@ def mode_5(choice):
         pins = pin_left
     else:
         pins = pin_right
-    f = 100
+    f = 50
+    s = 0.01
     p_1 = GPIO.PWM(pins[2], f)
     p_2 = GPIO.PWM(pins[1], f)
     p_3 = GPIO.PWM(pins[0], f)
@@ -91,15 +92,15 @@ def mode_5(choice):
     p_3.start(0)
     for dc in range(0,101, 5):
         p_1.ChangeDutyCycle(dc)
-        time.sleep(0.1)
+        time.sleep(s)
     p_1.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_2.ChangeDutyCycle(dc)
-        time.sleep(0.1)
+        time.sleep(s)
     p_2.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_3.ChangeDutyCycle(dc)
-        time.sleep(0.1)
+        time.sleep(s)
     p_3.ChangeDutyCycle(0)
 
 def mode_6(choice):
