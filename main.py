@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import random
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup([11,12,13,15,16,18], GPIO.OUT)
@@ -107,7 +108,7 @@ def mode_6(choice):
         pins = pin_right
     count = 50
     while count != 0:
-        l = int(choice(["1","2","3"]))
+        l = random.choice([1,2,3])
         GPIO.output(pins[l], 1)
         time.sleep(0.1)
         GPIO.output(pins[l], 0)
