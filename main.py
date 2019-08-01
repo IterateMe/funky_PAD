@@ -170,8 +170,8 @@ def callback_right(self):
 
 if __name__ == "__main__":
     try:
-        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 700)
-        GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 700)
+        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 1000)
+        GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 1000)
         while True:
             global mode
             print("Your actual mode:  ", mode)
