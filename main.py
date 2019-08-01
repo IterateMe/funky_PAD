@@ -12,7 +12,6 @@ pin_left = [11,12,13]
 pin_right = [15,16,18]
 
 def mode_1(choice):
-    print("THIS IS MODE 1")
     if choice:
         pins = pin_left
     else:
@@ -22,7 +21,6 @@ def mode_1(choice):
     GPIO.output(pins, 0)
 
 def mode_2(choice):
-    print("THIS IS MODE 2")
     if choice:
         pins = pin_left
     else:
@@ -38,7 +36,6 @@ def mode_2(choice):
     GPIO.output(pins[2], 0)
 
 def mode_3(choice):
-    print("THIS IS MODE 3")
     if choice:
         pins = pin_left
     else:
@@ -116,6 +113,21 @@ def mode_6(choice):
         GPIO.output(pins[D], 0)
         count -= 1
 
+def mode_7(choice):
+    if choice:
+        pins = pin_left
+    else:
+        pins = pin_right
+    s=0.1
+    p=GPIO.PWM(pins, 50)
+    p.start(0)
+    for dc in range(0,101,5):
+        p.CHangeDutyCycle(dc)
+        time.sleep(s)
+    for dc in range(100, -1, -5):
+        p.ChangeDutyCycle(dc)
+        time.sleep(s)
+
 def callback_left(self):
     if mode == 1:
         mode_1(1)
@@ -129,6 +141,8 @@ def callback_left(self):
         mode_5(1)
     if mode == 6:
         mode_6(1)
+    if mode == 7:
+        mode_7(1)
 
 def callback_right(self):
     if mode == 1:
@@ -143,6 +157,8 @@ def callback_right(self):
         mode_5(0)
     if mode == 6:
         mode_6(0)
+    if mode == 7:
+        mode_7(0)
 
 if __name__ == "__main__":
     try:
@@ -158,6 +174,7 @@ if __name__ == "__main__":
            [4] For sequential <PWM> activation Back to front
            [5] For sequential <PWM> activation Front to back
            [6] For random activation
+           [7] For Simultanous <PWM> activation
            """)
             mode = int(input())
 
