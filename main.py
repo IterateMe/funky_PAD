@@ -66,12 +66,15 @@ def mode_4(choice):
     for dc in range(0,101, 5):
         p_1.ChangeDutyCycle(dc)
         time.sleep(0.1)
+    p_1.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_2.ChangeDutyCycle(dc)
         time.sleep(0.1)
+    p_2.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_3.ChangeDutyCycle(dc)
         time.sleep(0.1)
+    p_3.ChangeDutyCycle(0)
 
 def mode_5(choice):
     if choice:
@@ -87,12 +90,15 @@ def mode_5(choice):
     for dc in range(0,101, 5):
         p_1.ChangeDutyCycle(dc)
         time.sleep(0.1)
+    p_1.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_2.ChangeDutyCycle(dc)
         time.sleep(0.1)
+    p_2.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_3.ChangeDutyCycle(dc)
         time.sleep(0.1)
+    p_3.ChangeDutyCycle(0)
 
 def mode_6(choice):
     if choice:
@@ -101,7 +107,7 @@ def mode_6(choice):
         pins = pin_right
     count = 50
     while count != 0:
-        l = choice([1,2,3])
+        l = int(choice(["1","2","3"]))
         GPIO.output(pins[l], 1)
         time.sleep(0.1)
         GPIO.output(pins[l], 0)
