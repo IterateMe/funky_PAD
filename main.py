@@ -110,7 +110,7 @@ def mode_6(choice):
     while count != 0:
         D = random.choice([0,1,2])
         GPIO.output(pins[D], 1)
-        time.sleep(0.1)
+        time.sleep(0.05)
         GPIO.output(pins[D], 0)
         count -= 1
 
