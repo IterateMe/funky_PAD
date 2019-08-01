@@ -52,6 +52,61 @@ def mode_3(choice):
     time.sleep(0.5)
     GPIO.output(pins[0], 0)
 
+def mode_4(choice):
+    if choice:
+        pins = pin_left
+    else:
+        pins = pin_right
+    p_1 = GPIO.PWM(pins[0], 50)
+    p_2 = GPIO.PWM(pins[1], 50)
+    p_3 = GPIO.PWM(pins[2], 50)
+    p_1.start(0)
+    p_2.start(0)
+    p_3.start(0)
+    for dc in range(0,101, 5):
+        p_1.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+    for dc in range(0,101, 5):
+        p_2.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+    for dc in range(0,101, 5):
+        p_3.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+
+def mode_5(choice):
+    if choice:
+        pins = pin_left
+    else:
+        pins = pin_right
+    p_1 = GPIO.PWM(pins[2], 50)
+    p_2 = GPIO.PWM(pins[1], 50)
+    p_3 = GPIO.PWM(pins[0], 50)
+    p_1.start(0)
+    p_2.start(0)
+    p_3.start(0)
+    for dc in range(0,101, 5):
+        p_1.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+    for dc in range(0,101, 5):
+        p_2.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+    for dc in range(0,101, 5):
+        p_3.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+
+def mode_6(choice):
+    if choice:
+        pins = pin_left
+    else:
+        pins = pin_right
+    count = 50
+    while count != 0:
+        l = choice([1,2,3])
+        GPIO.output(pins[l], 1)
+        time.sleep(0.1)
+        GPIO.output(pins[l], 0)
+        count -= 1
+
 def callback_left(self):
     if mode == 1:
         mode_1(1)
