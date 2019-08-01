@@ -106,7 +106,7 @@ def mode_6(choice):
         pins = pin_left
     else:
         pins = pin_right
-    count = 50
+    count = 20
     while count != 0:
         D = random.choice([0,1,2])
         GPIO.output(pins[D], 1)
