@@ -137,8 +137,7 @@ def callback_left(self):
     if mode == 7:
         mode_7(pin_left)
     if mode == 8:
-        pins = pin_left.extend(pin_right)
-        mode_8(pins)
+        mode_8(pin_left.extend(pin_right))
 
 def callback_right(self):
     if mode == 1:
