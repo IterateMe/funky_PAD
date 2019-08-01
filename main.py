@@ -11,20 +11,12 @@ mode = 1
 pin_left = [11,12,13]
 pin_right = [15,16,18]
 
-def mode_1(choice):
-    if choice:
-        pins = pin_left
-    else:
-        pins = pin_right
+def mode_1(pins):
     GPIO.output(pins, 1)
     time.sleep(1.5)
     GPIO.output(pins, 0)
 
-def mode_2(choice):
-    if choice:
-        pins = pin_left
-    else:
-        pins = pin_right
+def mode_2(pins):
     GPIO.output(pins[0], 1)
     time.sleep(0.5)
     GPIO.output(pins[0], 0)
@@ -35,11 +27,7 @@ def mode_2(choice):
     time.sleep(0.5)
     GPIO.output(pins[2], 0)
 
-def mode_3(choice):
-    if choice:
-        pins = pin_left
-    else:
-        pins = pin_right
+def mode_3(pins):
     GPIO.output(pins[2], 1)
     time.sleep(0.5)
     GPIO.output(pins[2], 0)
@@ -50,11 +38,7 @@ def mode_3(choice):
     time.sleep(0.5)
     GPIO.output(pins[0], 0)
 
-def mode_4(choice):
-    if choice:
-        pins = pin_left
-    else:
-        pins = pin_right
+def mode_4(pins):
     p_1 = GPIO.PWM(pins[0], 50)
     p_2 = GPIO.PWM(pins[1], 50)
     p_3 = GPIO.PWM(pins[2], 50)
@@ -74,11 +58,7 @@ def mode_4(choice):
         time.sleep(0.1)
     p_3.ChangeDutyCycle(0)
 
-def mode_5(choice):
-    if choice:
-        pins = pin_left
-    else:
-        pins = pin_right
+def mode_5(pins):
     f = 50
     s = 0.05
     p_1 = GPIO.PWM(pins[2], f)
@@ -100,11 +80,7 @@ def mode_5(choice):
         time.sleep(s)
     p_3.ChangeDutyCycle(0)
 
-def mode_6(choice):
-    if choice:
-        pins = pin_left
-    else:
-        pins = pin_right
+def mode_6(pins):
     count = 20
     while count != 0:
         D = random.choice([0,1,2])
@@ -113,7 +89,7 @@ def mode_6(choice):
         GPIO.output(pins[D], 0)
         count -= 1
 
-def mode_7(choice):
+def mode_7(pins):
     if choice:
         pins = pin_left
     else:
@@ -136,37 +112,52 @@ def mode_7(choice):
         p_3.ChangeDutyCycle(dc)
         time.sleep(s)
 
+def mode_8(pins):
+    count = 50
+    while count != 0:
+        D = random.choice([0,1,2,3,4,5])
+        GPIO.output(pins[D], 1)
+        time.sleep(0.05)
+        GPIO.output(pins[D], 0)
+        count -= 1
+
 def callback_left(self):
     if mode == 1:
-        mode_1(1)
+        mode_1(pin_left)
     if mode == 2:
-        mode_2(1)
+        mode_2(pin_left)
     if mode == 3:
-        mode_3(1)
+        mode_3(pin_left)
     if mode == 4:
-        mode_4(1)
+        mode_4(pin_left)
     if mode == 5:
-        mode_5(1)
+        mode_5(pin_left)
     if mode == 6:
-        mode_6(1)
+        mode_6(pin_left)
     if mode == 7:
-        mode_7(1)
+        mode_7(pin_left)
+    if mode == 8:
+        pins = pin_left.extend(pin_right)
+        mode_8(pins)
 
 def callback_right(self):
     if mode == 1:
-        mode_1(0)
+        mode_1(pin_right)
     if mode == 2:
-        mode_2(0)
+        mode_2(pin_right)
     if mode == 3:
-        mode_3(0)
+        mode_3(pin_right)
     if mode == 4:
-        mode_4(0)
+        mode_4(pin_right)
     if mode == 5:
-        mode_5(0)
+        mode_5(pin_right)
     if mode == 6:
-        mode_6(0)
+        mode_6(pin_right)
     if mode == 7:
-        mode_7(0)
+        mode_7(pin_right)
+    if mode == 8:
+        pins = pin_left.extend(pin_right)
+        mode_8(pins)
 
 if __name__ == "__main__":
     try:
@@ -183,6 +174,7 @@ if __name__ == "__main__":
            [5] For sequential <PWM> activation Front to back
            [6] For random activation
            [7] For Simultanous <PWM> activation
+           [8] For ALL OUTPUT RANDOM
            """)
             mode = int(input())
 
