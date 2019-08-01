@@ -129,7 +129,7 @@ def mode_9(pins):
     p_1.start(100)
     p_2.start(100)
     p_3.start(100)
-    s = 0.05
+    s = 0.01
     for dc in range(100,-1, -5):
         p_1.ChangeDutyCycle(dc)
         time.sleep(s)
