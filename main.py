@@ -6,39 +6,42 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup([11,12,13,15,16,18], GPIO.OUT)
 GPIO.setup([31,32], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
+global mode
+global s
 mode = 1
+s = 1
 
 pin_left = [11,12,13]
 pin_right = [15,16,18]
 
 def mode_1(pins):
-    s = 1
+    d = s
     GPIO.output(pins, 1)
-    time.sleep(s)
+    time.sleep(d)
     GPIO.output(pins, 0)
 
 def mode_2(pins):
-    s = 0.1
+    d = s*0.3
     GPIO.output(pins[0], 1)
-    time.sleep(s)
+    time.sleep(d)
     GPIO.output(pins[0], 0)
     GPIO.output(pins[1], 1)
-    time.sleep(s)
+    time.sleep(d)
     GPIO.output(pins[1], 0)
     GPIO.output(pins[2], 1)
-    time.sleep(s)
+    time.sleep(d)
     GPIO.output(pins[2], 0)
 
 def mode_3(pins):
-    s = 0.1
+    d = s * 0.3
     GPIO.output(pins[2], 1)
-    time.sleep(s)
+    time.sleep(d)
     GPIO.output(pins[2], 0)
     GPIO.output(pins[1], 1)
-    time.sleep(s)
+    time.sleep(d)
     GPIO.output(pins[1], 0)
     GPIO.output(pins[0], 1)
-    time.sleep(s)
+    time.sleep(d)
     GPIO.output(pins[0], 0)
 
 def mode_4(pins):
@@ -48,23 +51,23 @@ def mode_4(pins):
     p_1.start(0)
     p_2.start(0)
     p_3.start(0)
-    s = 0.03
+    d = s * 0.03
     for dc in range(0,101, 5):
         p_1.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     p_1.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_2.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     p_2.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_3.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     p_3.ChangeDutyCycle(0)
 
 def mode_5(pins):
     f = 50
-    s = 0.03
+    d = s * 0.03
     p_1 = GPIO.PWM(pins[2], f)
     p_2 = GPIO.PWM(pins[1], f)
     p_3 = GPIO.PWM(pins[0], f)
@@ -73,29 +76,29 @@ def mode_5(pins):
     p_3.start(0)
     for dc in range(0,101, 5):
         p_1.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     p_1.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_2.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     p_2.ChangeDutyCycle(0)
     for dc in range(0,101, 5):
         p_3.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     p_3.ChangeDutyCycle(0)
 
 def mode_6(pins):
     count = 20
-    s = 0.05
+    d = s * 0.05
     while count != 0:
         D = random.choice([0,1,2])
         GPIO.output(pins[D], 1)
-        time.sleep(s)
+        time.sleep(d)
         GPIO.output(pins[D], 0)
         count -= 1
 
 def mode_7(pins):
-    s=0.05
+    d = s * 0.05
     p_1 = GPIO.PWM(pins[0], 50)
     p_2 = GPIO.PWM(pins[1], 50)
     p_3 = GPIO.PWM(pins[2], 50)
@@ -106,20 +109,20 @@ def mode_7(pins):
         p_1.ChangeDutyCycle(dc)
         p_2.ChangeDutyCycle(dc)
         p_3.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     for dc in range(100, -1, -10):
         p_1.ChangeDutyCycle(dc)
         p_2.ChangeDutyCycle(dc)
         p_3.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
 
 def mode_8(pins):
     count = 50
-    s = 0.1
+    d = s * 0.1
     while count != 0:
         D = random.choice([0,1,2,3,4,5])
         GPIO.output(pins[D], 1)
-        time.sleep(s)
+        time.sleep(d)
         GPIO.output(pins[D], 0)
         count -= 1
 
@@ -130,16 +133,16 @@ def mode_9(pins):
     p_1.start(100)
     p_2.start(100)
     p_3.start(100)
-    s = 0.01
+    d =  s * 0.01
     for dc in range(100,-1, -5):
         p_1.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     for dc in range(100,-1, -5):
         p_2.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
     for dc in range(100,-1, -5):
         p_3.ChangeDutyCycle(dc)
-        time.sleep(s)
+        time.sleep(d)
 
 def callback_left(self):
     if mode == 1:
@@ -185,11 +188,10 @@ def callback_right(self):
 
 if __name__ == "__main__":
     try:
-        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 1000)
-        GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 1000)
+        GPIO.add_event_detect(31, GPIO.FALLING, callback = callback_left, bouncetime = 1000)
+        GPIO.add_event_detect(32, GPIO.FALLING, callback = callback_right, bouncetime = 1000)
         while True:
-            global mode
-            print("Your actual mode:  ", mode)
+            print("MODE {} IS IN USE".format(mode))
             print("""OPTIONS  :
            [1] For L/R simultanous activation
            [2] For L/R Sequential <logic> activation Back to Front
