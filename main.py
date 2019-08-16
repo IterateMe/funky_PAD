@@ -51,7 +51,7 @@ def mode_4(pins):
     p_1.start(0)
     p_2.start(0)
     p_3.start(0)
-    d = s * 0.03
+    d = s * 0.017
     for dc in range(0,101, 5):
         p_1.ChangeDutyCycle(dc)
         time.sleep(d)
@@ -67,7 +67,7 @@ def mode_4(pins):
 
 def mode_5(pins):
     f = 50
-    d = s * 0.03
+    d = s * 0.017
     p_1 = GPIO.PWM(pins[2], f)
     p_2 = GPIO.PWM(pins[1], f)
     p_3 = GPIO.PWM(pins[0], f)
@@ -89,7 +89,7 @@ def mode_5(pins):
 
 def mode_6(pins):
     count = 20
-    d = s * 0.05
+    d = s/count
     while count != 0:
         D = random.choice([0,1,2])
         GPIO.output(pins[D], 1)
@@ -118,7 +118,7 @@ def mode_7(pins):
 
 def mode_8(pins):
     count = 50
-    d = s * 0.1
+    d = s * 0.5
     while count != 0:
         D = random.choice([0,1,2,3,4,5])
         GPIO.output(pins[D], 1)
@@ -133,7 +133,7 @@ def mode_9(pins):
     p_1.start(100)
     p_2.start(100)
     p_3.start(100)
-    d =  s * 0.01
+    d =  s * 0.017
     for dc in range(100,-1, -5):
         p_1.ChangeDutyCycle(dc)
         time.sleep(d)
@@ -145,6 +145,7 @@ def mode_9(pins):
         time.sleep(d)
 
 def callback_left(self):
+    print("LEFT DETECTED")
     if mode == 1:
         mode_1(pin_left)
     if mode == 2:
@@ -166,6 +167,7 @@ def callback_left(self):
         mode_9(pin_left)
 
 def callback_right(self):
+    print("RIGHT DETECTED")
     if mode == 1:
         mode_1(pin_right)
     if mode == 2:
@@ -203,7 +205,8 @@ if __name__ == "__main__":
            [8] For ALL OUTPUT RANDOM
            [9] For L/R Sequential <PWM> DESactivation Back to Front
            """)
-            mode = int(input())
+            mode = int(input("Enter your mode:   "))
+            s = int(input("Enter your activation time frame:  "))
 
     except KeyboardInterrupt:
         GPIO.cleanup()
