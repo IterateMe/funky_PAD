@@ -192,7 +192,7 @@ def callback_right(self):
 
 def auto_run(auto):
     while auto:
-        if GPIO.input(31, 1) or GPIO.input(32, 1):
+        if GPIO.input(31) or GPIO.input(32):
             auto = 0
         else:
             callback_left(self)
