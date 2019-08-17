@@ -191,14 +191,10 @@ def right():
     if mode == 9:
         mode_9(pin_right)
 
-def callback_on_off(self):
-    print("ON OFF DETECTED")
+def callback_off(self):
     global auto
     if auto:
         auto = 0
-        clear()
-    else:
-        auto = 1
 
 def display_choices():
     print("""
@@ -220,7 +216,7 @@ def display_choices():
 
 if __name__ == "__main__":
     try:
-        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_on_off, bouncetime = 1000)
+        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_off, bouncetime = 1000)
         #GPIO.add_event_detect(32, GPIO.RISING, callback = callback_mode, bouncetime = 1000)
         while True:
             clear()
@@ -233,5 +229,6 @@ if __name__ == "__main__":
                 display_choices()
                 mode = int(input("Mode desired:   "))
                 s = int(input("Timespan desired:   "))
+                auto = 1
     except KeyboardInterrupt:
         GPIO.cleanup()
