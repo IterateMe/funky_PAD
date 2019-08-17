@@ -219,7 +219,7 @@ if __name__ == "__main__":
            [8] For ALL OUTPUT RANDOM
            [9] For L/R Sequential <PWM> DESactivation Back to Front
            """)
-            while True:
+            while auto:
                 right()
                 left()
             else:
