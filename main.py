@@ -198,19 +198,17 @@ def callback_on_off(self):
     global auto
     if auto:
         auto = 0
+        clear()
     else:
         auto = 1
 
-if __name__ == "__main__":
-    try:
-        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_on_off, bouncetime = 1000)
-        #GPIO.add_event_detect(32, GPIO.RISING, callback = callback_mode, bouncetime = 1000)
-        while True:
-            clear()
-            print("""MODE {} IS IN USE
-            With a timespan of {} seconds
-            Auto is: {}""".format(mode, s, auto))
-            print("""OPTIONS  :
+def display_choices():
+    print("""
+    MODE {} IS IN USE
+    With a timespan of {} seconds
+    Auto is: {}""".format(mode, s, auto))
+    print("""
+    OPTIONS  :
            [1] For L/R simultanous activation
            [2] For L/R Sequential <logic> activation Back to Front
            [3] For L/R Sequential <logic> activation Front to Back
@@ -221,10 +219,20 @@ if __name__ == "__main__":
            [8] For ALL OUTPUT RANDOM
            [9] For L/R Sequential <PWM> DESactivation Back to Front
            """)
+
+if __name__ == "__main__":
+    try:
+        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_on_off, bouncetime = 1000)
+        #GPIO.add_event_detect(32, GPIO.RISING, callback = callback_mode, bouncetime = 1000)
+        while True:
+            clear()
+            display_choices()
             while auto:
                 right()
                 left()
             else:
+                clear()
+                display_choices()
                 mode = int(input("Mode desired:   "))
                 s = int(input("Timespan desired:   "))
     except KeyboardInterrupt:
