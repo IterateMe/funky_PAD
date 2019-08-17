@@ -206,7 +206,8 @@ if __name__ == "__main__":
         while True:
             clear()
             print("""MODE {} IS IN USE
-            With a timespan of {} seconds""".format(mode, s))
+            With a timespan of {} seconds
+            Auto is: {}""".format(mode, s, auto))
             print("""OPTIONS  :
            [1] For L/R simultanous activation
            [2] For L/R Sequential <logic> activation Back to Front
