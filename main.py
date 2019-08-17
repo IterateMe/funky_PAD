@@ -192,7 +192,8 @@ def right():
         mode_9(pin_right)
 
 def callback_on_off(self):
-    global auto
+    print("ON OFF DETECTED")
+    auto
     if auto:
         auto = 0
     else:
