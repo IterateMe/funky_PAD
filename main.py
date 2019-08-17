@@ -150,7 +150,6 @@ def mode_9(pins):
         time.sleep(d)
 
 def left():
-    print("left")
     if mode == 1:
         mode_1(pin_left)
     if mode == 2:
@@ -172,7 +171,6 @@ def left():
         mode_9(pin_left)
 
 def right():
-    print("right")
     if mode == 1:
         mode_1(pin_right)
     if mode == 2:
