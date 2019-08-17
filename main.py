@@ -190,7 +190,7 @@ def callback_right(self):
     if mode == 9:
         mode_9(pin_right)
 
-def auto_run():
+def auto_run(auto):
     while auto:
         if GPIO.input(31, 1) or GPIO.input(32, 1):
             auto = 0
@@ -220,6 +220,6 @@ if __name__ == "__main__":
             s = int(input("Enter your activation time frame:  "))
             auto = (int(input("Automatic [1] OR manual [0]")))
             if auto:
-                auto_run()
+                auto_run(auto)
     except KeyboardInterrupt:
         GPIO.cleanup()
