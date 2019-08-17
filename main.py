@@ -1,6 +1,9 @@
 import RPi.GPIO as GPIO
 import time
+import os
 import random
+
+clear = lambda: os.system("clear")
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup([11,12,13,15,16,18], GPIO.OUT)
@@ -146,8 +149,7 @@ def mode_9(pins):
         p_3.ChangeDutyCycle(dc)
         time.sleep(d)
 
-def callback_left(self):
-    print("LEFT DETECTED")
+def left():
     if mode == 1:
         mode_1(pin_left)
     if mode == 2:
@@ -168,8 +170,7 @@ def callback_left(self):
     if mode == 9:
         mode_9(pin_left)
 
-def callback_right(self):
-    print("RIGHT DETECTED")
+def right():
     if mode == 1:
         mode_1(pin_right)
     if mode == 2:
@@ -190,19 +191,18 @@ def callback_right(self):
     if mode == 9:
         mode_9(pin_right)
 
-def auto_run(auto):
-    while auto:
-        if GPIO.input(31) or GPIO.input(32):
-            auto = 0
-        else:
-            callback_left(1)
-            callback_right(1)
+def callback_on_off(self):
+    if auto:
+        auto = 0
+    else:
+        auto =1
 
 if __name__ == "__main__":
     try:
-        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 1000)
-        GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 1000)
+        GPIO.add_event_detect(31, GPIO.RISING, callback = callback_on_off, bouncetime = 1000)
+        #GPIO.add_event_detect(32, GPIO.RISING, callback = callback_mode, bouncetime = 1000)
         while True:
+            clear()
             print("""MODE {} IS IN USE
             With a timespan of {} seconds""".format(mode, s))
             print("""OPTIONS  :
@@ -216,10 +216,11 @@ if __name__ == "__main__":
            [8] For ALL OUTPUT RANDOM
            [9] For L/R Sequential <PWM> DESactivation Back to Front
            """)
-            mode = int(input("Enter your mode:   "))
-            s = int(input("Enter your activation time frame:  "))
-            auto = (int(input("Automatic [1] OR manual [0]")))
             if auto:
-                auto_run(auto)
+                right()
+                left()
+            else:
+                mode = int(input("Mode desired:   "))
+                s = int(input("Timespan desired:   "))
     except KeyboardInterrupt:
         GPIO.cleanup()
