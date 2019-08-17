@@ -7,8 +7,10 @@ GPIO.setup([11,12,13,15,16,18], GPIO.OUT)
 GPIO.setup([31,32], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 global mode
+global auto
 global s
 mode = 1
+auto = 0
 s = 1
 
 pin_left = [11,12,13]
@@ -21,7 +23,7 @@ def mode_1(pins):
     GPIO.output(pins, 0)
 
 def mode_2(pins):
-    d = s*0.3
+    d = s * 0.3
     GPIO.output(pins[0], 1)
     time.sleep(d)
     GPIO.output(pins[0], 0)
@@ -188,12 +190,21 @@ def callback_right(self):
     if mode == 9:
         mode_9(pin_right)
 
+def auto():
+    while auto:
+        if GPIO.input(31, 1) or GPIO.input(32, 1):
+            auto = 0
+        else:
+            callback_left(self)
+            callback_right(self)
+
 if __name__ == "__main__":
     try:
         GPIO.add_event_detect(31, GPIO.RISING, callback = callback_left, bouncetime = 1000)
         GPIO.add_event_detect(32, GPIO.RISING, callback = callback_right, bouncetime = 1000)
         while True:
-            print("MODE {} IS IN USE".format(mode))
+            print("""MODE {} IS IN USE
+            With a timespan of {} seconds""".format(mode, s))
             print("""OPTIONS  :
            [1] For L/R simultanous activation
            [2] For L/R Sequential <logic> activation Back to Front
@@ -207,6 +218,6 @@ if __name__ == "__main__":
            """)
             mode = int(input("Enter your mode:   "))
             s = int(input("Enter your activation time frame:  "))
-
+            auto = (int(input("Automatic [1] OR manual [0]")))
     except KeyboardInterrupt:
         GPIO.cleanup()
