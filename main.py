@@ -195,8 +195,8 @@ def auto_run(auto):
         if GPIO.input(31) or GPIO.input(32):
             auto = 0
         else:
-            callback_left(self)
-            callback_right(self)
+            callback_left(1)
+            callback_right(1)
 
 if __name__ == "__main__":
     try:
