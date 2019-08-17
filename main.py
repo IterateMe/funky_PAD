@@ -219,5 +219,7 @@ if __name__ == "__main__":
             mode = int(input("Enter your mode:   "))
             s = int(input("Enter your activation time frame:  "))
             auto = (int(input("Automatic [1] OR manual [0]")))
+            if auto:
+                auto()
     except KeyboardInterrupt:
         GPIO.cleanup()
