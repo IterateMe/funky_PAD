@@ -193,7 +193,7 @@ def right():
 
 def callback_on_off(self):
     print("ON OFF DETECTED")
-    auto
+    global auto
     if auto:
         auto = 0
     else:
