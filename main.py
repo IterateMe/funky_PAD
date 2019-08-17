@@ -192,7 +192,7 @@ def right():
         mode_9(pin_right)
 
 def callback_on_off(self):
-    global auto
+    auto = auto
     if auto:
         auto = 0
     else:
@@ -217,7 +217,7 @@ if __name__ == "__main__":
            [8] For ALL OUTPUT RANDOM
            [9] For L/R Sequential <PWM> DESactivation Back to Front
            """)
-            if auto:
+            while auto:
                 right()
                 left()
             else:
